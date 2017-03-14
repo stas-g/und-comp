@@ -3,20 +3,26 @@ class Number:
         self.value = x
     def __repr__(self):
         return "%s" % self.value
-
+    def reducible(self):
+        return False
+        
 class Complex:
-    def __init__(self, a, b):
-        self.real = a
-        self.imag = b
+    def __init__(self, l, r):
+        self.left = l
+        self.right = r
     def __repr__(self):
-        return "%s + %si" % (self.real, self.imag)
-
+        return  "%s * %s" % (self.left, self.right)
+    def reducible(self):
+        return False
+        
 class Add:
     def __init__(self, l, r):
         self.left = l
         self.right = r
     def __repr__(self):
         return "%s + %s" % (self.left, self.right)
+    def reducible(self):
+        return True
 
 class Multiply:
     def __init__(self, l, r):
@@ -24,15 +30,10 @@ class Multiply:
         self.right = r
     def __repr__(self):
         return  "%s * %s" % (self.left, self.right)
-
-
-#Add(Multiply(Number(1), Number(2)), Multiply(Number(3), Number(4)))
-
-def reducible(expr):
-    if expr.__class__ == Number or expr.__class__ == Complex:
-        return False
-    else:
+    def reducible(self):
         return True
-    
-#reducible(Number(10))
-#reducbile(Add(45, 12))
+
+
+#Number(10).reducible()
+#Add(20, 10).reducible()
+#Multiply(45, 12).reducible()
