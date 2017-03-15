@@ -23,9 +23,13 @@ class Add:
         return "%s + %s" % (self.left, self.right)
     def reducible(self):
         return True
-    def reduce(self, a, b):
-        if a.reducible() == True:
-            return Add(self.left.reduce)
+    def reduce(self):
+        if self.left.reducible():
+            return Add(self.left.reduce(), self.right)
+        elif self.right.reducible():
+            return Add(self.left, self.right.reduce())
+        else:
+            return Number(self.left.value + self.right.value)
 
 class Multiply:
     def __init__(self, l, r):
@@ -35,8 +39,17 @@ class Multiply:
         return  "%s * %s" % (self.left, self.right)
     def reducible(self):
         return True
+    def reduce(self):
+        if self.left.reducible():
+            return Add(self.left.reduce(), self.right)
+        elif self.right.reducible():
+            return Add(self.left, self.right.reduce())
+        else:
+            return Number(self.left.value * self.right.value)
 
 
-#Number(10).reducible()
-#Add(20, 10).reducible()
-#Multiply(45, 12).reducible()
+#expression = Add(Multiply(Number(1), Number(2)), Multiply(Number(3), Number(4)))
+#expression.reducible()
+#expression.reduce()
+#expression.reduce().reduce()
+#expression.reduce().reduce().reduce()
