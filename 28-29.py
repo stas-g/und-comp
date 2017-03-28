@@ -47,9 +47,32 @@ class Multiply:
         else:
             return Number(self.left.value * self.right.value)
 
+class Machine:
+    def __init__(self, expression):
+        self.expr = expression
+    def step():
+        self.expr = self.expr.reduce()
+    def run(self):
+        while self.expr.reducible():
+            print(self.expr)
+            step()
+        
 
-#expression = Add(Multiply(Number(1), Number(2)), Multiply(Number(3), Number(4)))
-#expression.reducible()
-#expression.reduce()
-#expression.reduce().reduce()
-#expression.reduce().reduce().reduce()
+class Test:
+    def__init__(self, x):
+        self.a = x
+    def fun():
+        z = x*x
+    def __repr__(self):
+        
+
+
+class Machine < Struct.new(:expression)
+def step
+self.expression = expression.reduce
+end
+def run
+while expression.reducible?
+puts expression
+step
+end
